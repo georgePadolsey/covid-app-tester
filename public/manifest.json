@@ -1,6 +1,7 @@
 {
   "name": "John's Covid Test Scan",
   "short_name": "LFT Scanner",
+  "description": "Quick PWA to scan LFT QR codes provided by Durham University LFT service.",
   "theme_color": "#ffffff",
   "background_color": "#14478f",
   "orientation": "portrait",

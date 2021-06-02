@@ -1,10 +1,14 @@
+// only used for local development to generate https
 const { createServer } = require("https");
 const { parse } = require("url");
 const next = require("next");
 const fs = require("fs");
+
 const dev = process.env.NODE_ENV !== "production";
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
 const httpsOptions = {
   key: fs.readFileSync("./certificates/localhost.key"),
   cert: fs.readFileSync("./certificates/localhost.crt"),

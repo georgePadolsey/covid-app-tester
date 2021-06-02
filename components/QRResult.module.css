@@ -1,0 +1,44 @@
+.qrResultContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 100;
+  padding: 10%;
+  color: white;
+}
+
+.qrResultContainer.invalid {
+  background-color: #ff0033;
+}
+
+.qrResultContainer.valid {
+  background-color: #0aa920;
+}
+
+.qrResultContainer p {
+  font-size: 3em;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.qrResultContainer ul {
+  font-size: 1em;
+  margin-top: 3em;
+}
+
+.qrResultContainer ul li {
+  margin-top: 0.5em;
+}
+
+.qrResultContainer .invalid {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.qrResultContainer pre {
+  position: fixed;
+  bottom: 10%;
+}
