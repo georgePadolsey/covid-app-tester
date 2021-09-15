@@ -6,6 +6,7 @@ const downloadCSV = (rows: string[][]) => {
           if (cell === undefined || cell == null) {
             return '""';
           }
+
           // We remove blanks and check if the column contains
           // other whitespace,`,` or `"`.
           // In that case, we need to quote the column.

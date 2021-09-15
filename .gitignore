@@ -5,3 +5,7 @@
 node_modules/
 .DS_Store
 out
+
+# Ignore service worker
+public/sw*
+public/workbox-*

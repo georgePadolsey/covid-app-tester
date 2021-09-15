@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import dynamic from "next/dynamic";
-import { validateQR } from "../utils/validateQR";
+import { validateQR, ValidateQRResponse } from "../utils/validateQR";
 
 /**
  * Only load client side
@@ -15,36 +15,36 @@ export interface ExtraPersonInfo {
   testRef: number;
 }
 
-export interface QRResultData {
+export type QRResultData = {
   originalData: string;
-  isValid: boolean;
-  invalidReasons: string[];
-  extraInformation: ExtraPersonInfo;
+} & ValidateQRResponse;
+
+interface QRScannerProps {
+  onScan: (scanData: QRResultData) => void;
+  onError: (e: unknown) => void;
 }
 
-const QRScanner = ({ onScan, onError }) => {
-  const handleError = useCallback((err) => {
-    onError(err);
-  }, []);
+const QRScanner = ({ onScan, onError }: QRScannerProps) => {
+  const handleError = useCallback(
+    (err: unknown) => {
+      onError(err);
+    },
+    [onError]
+  );
 
-  const handleScan = useCallback((qrData) => {
-    if (qrData) {
-      let isValid: boolean,
-        invalidReasons: string[],
-        extraInformation: ExtraPersonInfo;
-      try {
-        [isValid, invalidReasons, extraInformation] = validateQR(qrData);
-      } catch (e) {
-        onError(e);
+  const handleScan = useCallback(
+    (qrData: string) => {
+      if (qrData) {
+        try {
+          // wrap with original data so can respond state-fully
+          onScan({ originalData: qrData, ...validateQR(qrData) });
+        } catch (e) {
+          onError(e);
+        }
       }
-      onScan({
-        originalData: qrData,
-        isValid,
-        extraInformation,
-        invalidReasons,
-      });
-    }
-  }, []);
+    },
+    [onScan, onError]
+  );
 
   return (
     <div>

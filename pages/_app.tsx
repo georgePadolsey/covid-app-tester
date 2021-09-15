@@ -1,9 +1,11 @@
 import React from "react";
 import Head from "next/head";
+
+import type { AppProps } from "next/app";
+
 import "../styles/styles.css";
 
-// This default export is required in a new `pages/_app.js` file.
-export default function CovidScannerApp({ Component, pageProps }) {
+export function CovidScannerApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -15,7 +17,7 @@ export default function CovidScannerApp({ Component, pageProps }) {
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>John's Covid Scanner</title>
+        <title>LFT Scanner</title>
 
         <link
           rel="apple-touch-icon"
@@ -47,3 +49,5 @@ export default function CovidScannerApp({ Component, pageProps }) {
     </>
   );
 }
+
+export default CovidScannerApp;

@@ -7,3 +7,7 @@ This is a simple app just used to validate any QR codes given by the Durham Univ
 You can use it directly from the webpage or install it as an app.
 
 The App can be found at (it requires camera access): [https://stjohnscommonroom.org.uk/covid-test/](https://stjohnscommonroom.org.uk/covid-test/)
+
+## Technical Details
+
+- The validation/parsing (Parse not validate!) of the QR code data in `utils/validateQr.ts`.

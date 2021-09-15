@@ -1,13 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import useStateMachine from "@cassiozen/usestatemachine";
-import {
-  ExtraPersonInfo,
-  QRResultData,
-  QRScanner,
-} from "../components/QRScanner";
+import { QRResultData, QRScanner } from "../components/QRScanner";
 import _uniqBy from "lodash/uniqBy";
 import styles from "../styles/index.module.css";
-import { validateQR } from "../utils/validateQR";
 
 import { PeopleScanned } from "../components/PeopleScanned";
 
@@ -18,22 +13,21 @@ import Swal from "sweetalert2";
 
 const usePeopleScannedState = createPersistedState("peopleScanned");
 
-export interface ScannedPersonData extends ExtraPersonInfo {
+export type ScannedPersonData = QRResultData & {
   timeScanned: string;
-  isValid: boolean;
-}
+};
 
 /**
  * TODO export to multiple different components!
  */
 const IndexPage = ({}) => {
-  const lastQRResult = useRef(null as QRResultData);
+  const lastQRResult = useRef<QRResultData | null>(null);
 
-  const [peopleScanned, setPeopleScanned] = usePeopleScannedState(
-    [] as ScannedPersonData[]
-  );
+  const [peopleScanned, setPeopleScanned] = usePeopleScannedState<
+    ScannedPersonData[]
+  >([]);
 
-  const [state, send] = useStateMachine()({
+  const [state, send] = useStateMachine({
     initial: "WAITING",
     states: {
       WAITING: {
@@ -49,11 +43,16 @@ const IndexPage = ({}) => {
       QR_SCANNED: {
         on: { RESET: "WAITING", PEOPLE_SCANNED_OPEN: "SHOW_PEOPLE_SCANNED" },
         effect() {
+          if (lastQRResult.current == null) {
+            console.warn(
+              "Last QR Result was null, this shouldn't happen when moving"
+            );
+            return;
+          }
           setPeopleScanned([
             {
-              ...lastQRResult.current.extraInformation,
+              ...lastQRResult.current,
               timeScanned: dayjs().format("HH:mm:ss DD/MM/YY"),
-              isValid: lastQRResult.current.isValid,
             },
             ...peopleScanned,
           ]);
@@ -75,16 +74,16 @@ const IndexPage = ({}) => {
 
   const onClearPeopleScanned = useCallback(() => {
     setPeopleScanned([]);
-  }, []);
+  }, [setPeopleScanned]);
 
   const onClosePeopleScanned = useCallback(() => {
     send("RESET");
-  }, []);
+  }, [send]);
 
   return (
     <>
       <div className={styles.appContainer}>
-        {state.value === "QR_SCANNED" ? (
+        {state.value === "QR_SCANNED" && lastQRResult.current != null ? (
           <QRResult qrResult={lastQRResult?.current} />
         ) : null}
 
