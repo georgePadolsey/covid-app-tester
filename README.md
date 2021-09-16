@@ -10,10 +10,9 @@ The App can be found at (it requires camera access): [https://stjohnscommonroom.
 
 ## Building
 
-To build the application for production (i.e. to bundle into html and javascript files which can be dropped on any usual http server like apache, nginx etc.). You will need NodeJS as well as Yarn.
+To build the application for production (i.e. to bundle into html and javascript files which can be dropped on any usual http server like apache, nginx etc.). You will need NodeJS, additionally yarn is recommended. If you don't have `yarn` feel free to substitute all the following commands by replacing `yarn` with `npm` (the standard NodeJS package manager).
 
-First run `yarn install` to install all the dependencies then `yarn build` to generate the out file.
-
+First run `yarn install` to install all the dependencies then `yarn build` to generate the `out` directory (as listed for deployment).
 
 ## Deploying
 
