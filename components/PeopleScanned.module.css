@@ -7,7 +7,7 @@
   height: 100%;
   padding: 2em;
 
-  background-color: rgb(20, 70, 141);
+  background-color: rgb(104, 36, 109);
 }
 
 .showPeopleScanned table {
@@ -19,19 +19,26 @@
 
 .buttonBar button {
   display: inline-block;
-  border-radius: 10px;
-  padding: 1em 3em 1em 3em;
-  margin: 0.2em;
+  border-radius: 3px 3px 0px 0px;
+  padding: 1.2em;
+  margin: 0em 0.2em 0em 0em;
+  border: none;
   background-color: whitesmoke;
 }
 
 .buttonBar button.clear {
-  background-color: rgb(240, 40, 40);
+  color: white;
+  background-color: rgb(190, 30, 45);
 }
 
 .buttonBar {
-  position: absolute;
-  left: 5%;
-  bottom: 1em;
-  width: 90%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .showPeopleScanned {
+    padding: 0;
+  }
 }

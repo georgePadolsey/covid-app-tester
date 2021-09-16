@@ -27,6 +27,8 @@ const IndexPage = ({}) => {
     ScannedPersonData[]
   >([]);
 
+  // Simple state machine describing UI process
+  // Described in docs/main-state-machine.png
   const [state, send] = useStateMachine({
     initial: "WAITING",
     states: {
@@ -45,7 +47,7 @@ const IndexPage = ({}) => {
         effect() {
           if (lastQRResult.current == null) {
             console.warn(
-              "Last QR Result was null, this shouldn't happen when moving"
+              "Last QR Result was null, this shouldn't happen when moving from "
             );
             return;
           }
@@ -83,6 +85,11 @@ const IndexPage = ({}) => {
   return (
     <>
       <div className={styles.appContainer}>
+        <noscript>
+          Unfortunately, this application requires JavaScript to be able to run.
+          Please enable JavaScript.
+        </noscript>
+
         {state.value === "QR_SCANNED" && lastQRResult.current != null ? (
           <QRResult qrResult={lastQRResult?.current} />
         ) : null}
@@ -121,17 +128,17 @@ const IndexPage = ({}) => {
         />
 
         <div className={styles.scanning}>
-          <p>Scanning...</p>
+          <p>Scan a QR code&hellip;</p>
         </div>
 
         <button
           className={styles.peopleScannedOpen}
           onClick={() => send("PEOPLE_SCANNED_OPEN")}
         >
-          People scanned
+          Scan list
         </button>
 
-        <footer className={styles.footer}>Designed by the SJCR</footer>
+        <footer className={styles.footer}>Designed by St Johns JCR</footer>
       </div>
     </>
   );

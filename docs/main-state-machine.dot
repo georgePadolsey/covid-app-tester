@@ -1,0 +1,8 @@
+digraph G {
+
+    WAITING -> QR_SCANNED [label="On QR Scan"];
+    WAITING -> SHOW_PEOPLE_SCANNED [label="On open scan list"];
+    QR_SCANNED -> WAITING [label="After timeout of showing", labeltooltip="The timeout will be 3 seconds if valid, 5 seconds if invalid QR."];
+    QR_SCANNED -> SHOW_PEOPLE_SCANNED [label="On open scan list"];
+    SHOW_PEOPLE_SCANNED -> WAITING [label="On close scan list"];
+}

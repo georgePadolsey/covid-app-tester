@@ -16,9 +16,8 @@ const DATE_REGEX =
 // dayJs date format https://day.js.org/docs/en/parse/string-format
 const DATE_FORMAT = "DD MMM YYYY";
 
-// Implement magic invalid reason strings as an enum
-// This could be generalised later into i18n
-
+// Implement invalid reason strings as an enum
+// This could be generalised later into i18n easily
 export enum INVALID_QR_SCAN_REASONS {
   NAME_IS_UNDEFINED = "The name is undefined / null. Are you sure this is from an LFT email?",
   USERNAME_IS_UNDEFINED = "The username is undefined / null. Are you sure this is from an LFT email?",
@@ -39,6 +38,7 @@ export interface QRScanMetadata {
 
 interface BaseQRResponse {
   isValid: boolean;
+  scanMetadata?: QRScanMetadata;
 }
 
 interface ValidQRResponse extends BaseQRResponse {
@@ -49,7 +49,6 @@ interface ValidQRResponse extends BaseQRResponse {
 
 interface InvalidQRResponse extends BaseQRResponse {
   isValid: false;
-  scanMetadata?: never;
   invalidReasons: INVALID_QR_SCAN_REASONS[];
 }
 
@@ -130,7 +129,14 @@ const validateQR = (qrData: string): ValidateQRResponse => {
   }
 
   if (invalidReasons.length !== 0) {
-    return { isValid: false, invalidReasons };
+    return {
+      isValid: false,
+      invalidReasons,
+      // it is safe to return name, username, testref here
+      // as we've verified they are not null
+      // however they may still be incorrect
+      scanMetadata: { name: name!, username: username!, testRef },
+    };
   }
 
   return {

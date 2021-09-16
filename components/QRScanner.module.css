@@ -1,0 +1,5 @@
+/* Viewfinder element */
+.qrReaderContainer > section > div {
+  /* based off https://www.dur.ac.uk/brand/local/colourpalette/ */
+  box-shadow: rgb(190 30 45 / 50%) 0px 0px 0px 5px inset !important;
+}

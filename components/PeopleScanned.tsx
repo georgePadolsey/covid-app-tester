@@ -9,6 +9,17 @@ interface Props {
   onClear: () => void;
 }
 
+/**
+ * Element which provides a tabular summary of all the people scanned
+ * (passed in as a prop `peopleScanned`).
+ *
+ * It will call `onClose` prop, when the element has been requested to close.
+ * It will call `onClear` prop, when the element has been requested to clear
+ * all data.
+ *
+ * @param props containing peopleScanned,onClose,onClear.
+ * @returns React element
+ */
 const PeopleScanned = ({ peopleScanned, onClose, onClear }: Props) => {
   return (
     <div className={styles.showPeopleScanned}>
@@ -28,9 +39,9 @@ const PeopleScanned = ({ peopleScanned, onClose, onClear }: Props) => {
               return (
                 <tr key={person?.timeScanned}>
                   <td>{person?.timeScanned}</td>
-                  <td>{person?.name}</td>
-                  <td>{person?.username}</td>
-                  <td>{person?.testRef}</td>
+                  <td>{person?.scanMetadata?.name}</td>
+                  <td>{person?.scanMetadata?.username}</td>
+                  <td>{person?.scanMetadata?.testRef}</td>
                   <td>{person?.isValid ? "✅" : "❌"}</td>
                 </tr>
               );
@@ -38,9 +49,11 @@ const PeopleScanned = ({ peopleScanned, onClose, onClear }: Props) => {
           </tbody>
         </table>
       ) : (
+        // Below will display if there is no scan data
         <p>Information will appear here as people scan in.</p>
       )}
       <footer className={styles.buttonBar}>
+        <button onClick={onClose}>Back to Scanning</button>
         <button
           onClick={() => {
             downloadCSV([
@@ -48,9 +61,9 @@ const PeopleScanned = ({ peopleScanned, onClose, onClear }: Props) => {
               ...peopleScanned.map((person) => {
                 return [
                   person?.timeScanned,
-                  person?.name,
-                  person?.username,
-                  String(person?.testRef),
+                  person?.scanMetadata?.name || "",
+                  person?.scanMetadata?.username || "",
+                  String(person?.scanMetadata?.testRef),
                   String(person?.isValid),
                 ];
               }),
@@ -59,7 +72,7 @@ const PeopleScanned = ({ peopleScanned, onClose, onClear }: Props) => {
         >
           Export
         </button>
-        <button onClick={onClose}>Back to Scanning</button>
+
         <button
           className={styles.clear}
           onClick={async () => {

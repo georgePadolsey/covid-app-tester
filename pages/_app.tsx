@@ -15,7 +15,10 @@ export function CovidScannerApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <meta name="description" content="Description" />
+        <meta
+          name="description"
+          content="LFT Scanner used at Durham University events for scanning LFT QR codes provided by Durham Universities LFT."
+        />
         <meta name="keywords" content="Keywords" />
         <title>LFT Scanner</title>
 

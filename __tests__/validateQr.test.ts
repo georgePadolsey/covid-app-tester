@@ -72,6 +72,45 @@ test("Old and no name, but all else right should give just no name error ", () =
   });
 });
 
+test("All valid but testRef not number", () => {
+  expect(
+    validateQR(
+      fakeResult({
+        name: "Jeff Bloggs",
+        username: "ABCD23",
+        date: dayjs().format(DATE_FORMAT),
+        testResult: "NEGATIVE",
+        testRef: "abc",
+      })
+    )
+  ).toStrictEqual({
+    isValid: false,
+    invalidReasons: [INVALID_QR_SCAN_REASONS.TEST_REF_NAN],
+  });
+});
+
+test("All valid except result is POSITIVE, should return metadata", () => {
+  expect(
+    validateQR(
+      fakeResult({
+        name: "Jeff Bloggs",
+        username: "ABCD23",
+        date: dayjs().format(DATE_FORMAT),
+        testResult: "POSITIVE",
+        testRef: "542135",
+      })
+    )
+  ).toStrictEqual({
+    isValid: false,
+    invalidReasons: [INVALID_QR_SCAN_REASONS.TEST_RESULT_POSITIVE],
+    scanMetadata: {
+      name: "Jeff Bloggs",
+      username: "ABCD23",
+      testRef: 542135,
+    },
+  });
+});
+
 // should only give no name error as should return earlier
 test("Old and no username, but all else right should give just no username error ", () => {
   expect(

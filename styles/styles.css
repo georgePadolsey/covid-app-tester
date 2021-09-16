@@ -1,9 +1,12 @@
 body {
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
+  /* based off https://www.dur.ac.uk/brand/local/fonts/ */
+  font-family: "Gotham", "Open Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+
   margin: 0 auto;
   padding: 0;
-  background-color: rgb(20, 70, 141);
+
+  /* Based off https://www.dur.ac.uk/brand/local/colourpalette/  */
+  background-color: rgb(104, 36, 109);
   color: white;
 }
 

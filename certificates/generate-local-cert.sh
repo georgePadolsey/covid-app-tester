@@ -1,6 +1,9 @@
 # Due to the application requiring camera access, when developing you need to be over https.
 # Hence, you need to generate some fake https certificates for dev environment
 # https://medium.com/responsetap-engineering/nextjs-https-for-a-local-dev-server-98bb441eabd7
+#
+# Any certificate generated from the below SHOULD NOT be used in production (and probably won't work!).
+# On a production server, a standard https certificate should be used.
 
 openssl req -x509 -out localhost.crt -keyout localhost.key \
   -days 365 \
