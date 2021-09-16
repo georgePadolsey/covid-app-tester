@@ -1,10 +1,10 @@
 {
   "name": "covid-app-tester",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scanning Application for LFT QR codes provided by the Durham University LFT scanning program.",
   "repository": "https://github.com/georgePadolsey/covid-app-tester.git",
   "author": "George P",
-  "license": "MIT (see LICENSE.md)",
+  "license": "MIT",
   "dependencies": {
     "@cassiozen/usestatemachine": "^1.0.0-beta.2",
     "dayjs": "^1.10.7",
