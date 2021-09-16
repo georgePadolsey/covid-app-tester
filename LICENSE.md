@@ -6,7 +6,7 @@ Caveat: The follow codebase is provided under MIT license apart from the image
 files in the `public/` directory. These images files are denoted by the '.png',
 '.ico' and '.svg' file extensions. These image files are retained under St John's
 Common Room copyright (Registered Charity Number 1155621). All other files in this
-repository are listed under the MIT license.
+repository are listed under the MIT license as detailed below.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
