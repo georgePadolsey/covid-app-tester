@@ -22,9 +22,9 @@ The application requires https. This is due to the security requirements of mode
 
 *Be aware*: The current configuration builds the files such they are expecting to be hosted on a domain at `/covid-test/` as the base path (e.g. `example.com/covid-test/`). If you would like to change the base path for deployment, change it in `next.config.js`.
 
-## Changing Logo's
+## Changing Branding
 
-All logos can be changed via changing the png, ico and similar files in the `public/` directory
+All logos and branding can be changed via changing the png, ico and similar files in the `public/` directory.
 
 ## Testing
 
